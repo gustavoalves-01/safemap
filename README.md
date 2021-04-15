@@ -19,3 +19,11 @@ https://www.figma.com/file/48R85V2eMhFlYAWjN75E2d/Web?node-id=0%3A1
 - API Google Places
 - API reCapcha Authenticator
 
+## Integrantes do Grupo
+
+- Gustavo da Silva Alves - 820148950
+- Eduardo Leite Duarte - 820138795
+- Matheus Henrique Biló - 820114982
+- Guilherme Ibraim Altobello de Oliveira - 820132326
+- Bruno dos Santos Gonçalves - 821151376
+- Anderson Vitor da Silva Barros - 819159969
