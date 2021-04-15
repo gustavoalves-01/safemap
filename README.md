@@ -18,5 +18,4 @@ https://www.figma.com/file/48R85V2eMhFlYAWjN75E2d/Web?node-id=0%3A1
 - NodeJS
 - API Google Places
 - API reCapcha Authenticator
-- 
 
