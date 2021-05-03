@@ -1,12 +1,11 @@
-import {SearchBar} from './components/SearchBar'
+import { Map } from './components/Map';
 
 import { GlobalStyle } from './styles/global'
 
 function App() {
   return (
     <>
-    <SearchBar />
-
+    <Map />
     <GlobalStyle />
     </>
   );
