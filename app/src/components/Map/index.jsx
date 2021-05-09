@@ -1,18 +1,12 @@
 import React, { useCallback, useState, useRef } from 'react';
+import useOnclickOutside from 'react-cool-onclickoutside'
 
 // Imports de API
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api"
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete"
-import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox"
-import "@reach/combobox/styles.css"
-
-// Imports de componentes
-import {SearchBar} from '../SearchBar'
 
 // Imports de estilo
-import mapStyle from './mapStyle'
-import { Container } from './styles'
-
+import { Container, ComboboxContainer, SearchContainer } from './styles'
 
 // Variáveis de configuração do mapa
 const libraries = ["places"]
@@ -22,22 +16,19 @@ const mapContainerStyle = {
     height: "100vh",
 }
   
- 
- const center = {
+const center = {
     lat: 43.653225,
     lng: -79.383186
- }
+}
  
- const options = {
-    styles: mapStyle,
+const options = {
     disableDefaultUI: true,
     zoomControl: true
- }
-
+}
 
 export function Map (){   
     const { isLoaded, loadError } = useLoadScript( {
-        googleMapsApiKey: "",
+        googleMapsApiKey: "AIzaSyAdKHx-aLz1X2Sj8HEGwY7kua1avlL7UfU",
         libraries
       })
     
@@ -59,7 +50,7 @@ export function Map (){
 
       const panTo = useCallback(({lat, lng}) => {
         mapRef.current.panTo({lat, lng})
-        mapRef.current.setZoom(14)
+        mapRef.current.setZoom(16)
       }, [])
     
       if(loadError) return "Error loadind maps"
@@ -93,9 +84,7 @@ export function Map (){
         </GoogleMap>
         </div>
         <div className="pesquisa">
-        {/* <SearchBar/> */}
         <Search panTo={panTo}/>
-        <Locate panTo={panTo}/>
         </div>
         
     </Container>
@@ -118,42 +107,65 @@ function Locate({ panTo }) {
   )
 }
 
-function Search({panTo}) {
-  const { ready, value, suggestions: {status, data}, setValue, clearSuggestions } = usePlacesAutocomplete({
-    requestOptions: {
-      location: {lat: () => 43.653225, lng: () =>  -79.383186},
-      radius: 200 * 1000, //retorna locai preferenciamente em 200km próximo ao centro
-    }
+function Search({panTo}){
+        const {
+          ready,
+          value,
+          suggestions: { status, data },
+          setValue,
+          clearSuggestions,
+        } = usePlacesAutocomplete({
+          requestOptions: {
+          },
+          debounce: 300,
+        });
 
-  })
-
-  return (
-  <div className="search">
-  <Combobox 
-      onSelect={async (address) => {
-        setValue(address, false)
-        clearSuggestions()
-        try {
-          const results = await getGeocode({address})
-          const {lat, lng} = await getLatLng(results[0])
-          panTo( {lat, lng} )
-        } catch (error) {
-          console.log("error!")
-        }
-      }}
-    >
-      <ComboboxInput 
-        value={value}
-        onChange={(e) => {setValue(e.target.value)}}
-        disabled={!ready}
-        placeholder="Enter an address"
-      />
-      <ComboboxPopover>
-        <ComboboxList>
-        {status === 'OK' && data.map(({id, description}) => <ComboboxOption key={id} value={description}/>)}
-        </ComboboxList>
-      </ComboboxPopover> 
-  </Combobox>
-  </div>
-  )
-}
+        const ref = useOnclickOutside(() => {
+          clearSuggestions();
+        });
+      
+        const handleInput = (e) => {
+          setValue(e.target.value);
+        };
+      
+        const handleSelect = ({ description }) => () => {
+          setValue(description, false)
+          clearSuggestions()      
+          getGeocode({ address: description })
+            .then((results) => getLatLng(results[0]))
+            .then(({ lat, lng }) => {
+              console.log("📍 Coordinates: ", { lat, lng });
+            panTo( {lat, lng})
+            })
+            .catch((error) => {
+              console.log("😱 Error: ", error);
+            });
+        };
+      
+        const renderSuggestions = () =>
+          data.map((suggestion) => {
+            const {
+              place_id,
+              structured_formatting: { main_text, secondary_text },
+            } = suggestion;
+      
+            return (
+              <li className="item" key={place_id} onClick={handleSelect(suggestion)}>
+                <strong>{main_text}</strong> <small>{secondary_text}</small>
+              </li>
+            );
+          });
+  
+    return (
+      <SearchContainer ref={ref}>
+        <input
+          className="input"
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+          placeholder="Pesquise um local..."
+        />
+        {status === "OK" && <ul className="lista">{renderSuggestions()}</ul>}
+      </SearchContainer>
+    );
+};
