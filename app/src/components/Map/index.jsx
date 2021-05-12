@@ -3,7 +3,7 @@ import useOnclickOutside from 'react-cool-onclickoutside'
 
 // Imports de API
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api"
-import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete"
+import usePlacesAutocomplete, { getGeocode, getLatLng, getDetails } from "use-places-autocomplete"
 
 // Imports de estilo
 import { Container, ComboboxContainer, SearchContainer } from './styles'
@@ -120,6 +120,9 @@ function Search({panTo}){
           debounce: 300,
         });
 
+        
+        
+
         const ref = useOnclickOutside(() => {
           clearSuggestions();
         });
@@ -128,9 +131,10 @@ function Search({panTo}){
           setValue(e.target.value);
         };
       
-        const handleSelect = ({ description }) => () => {
+        const handleSelect = ({ description, place_id }) => () => {
           setValue(description, false)
           clearSuggestions()      
+          
           getGeocode({ address: description })
             .then((results) => getLatLng(results[0]))
             .then(({ lat, lng }) => {
@@ -140,6 +144,19 @@ function Search({panTo}){
             .catch((error) => {
               console.log("😱 Error: ", error);
             });
+
+          const params = {
+            placeId: place_id
+          }
+
+          getDetails(params)
+            .then((details) => {
+              console.log("Details: ", details)
+            })
+            .catch((error) => {
+              console.log("Error", error)
+            })
+            
         };
       
         const renderSuggestions = () =>
