@@ -1,22 +1,46 @@
 import React from 'react';
 
+import { usePlace } from '../../providers/place'
+
+import mapsImg from '../../assets/google-maps.svg'
+
 import { Container } from './styles';
 
 export function Sidebar() {
-  return (
-      <Container>
-          
-          <div className="place-details">
-              <h1>Title</h1>
-              <span id="address">Av. Brasil, 200 - Centro/SP</span>
-              <span id="phone">(11) 4545-4545</span>
-              <span id="category">Faculdade</span>
-              <button id="route">ver rotas</button>
-              <img src="https://storage.giracurso.com/source/imagem/1379/f_KiVbKEb56LUecI_M3u798WAJYOGzmGa3.jpg"/>
-          </div>
-          
-      </Container>
-  );
-}
+    const { 
+        place, 
+        categoryHandled, 
+        categoryToHandle, 
+        handleCategory, 
+        isRendered, 
+        setIsRendered 
+    }  = usePlace()
+    
+    handleCategory(categoryToHandle)
+    
+    return (
+        
+        <Container>
+        {isRendered?
+            <div className="place-details">
+            <h1>{place.name}</h1>
+            <span id="address">{place.address}</span>
+            <span id="phone">{place.phone}</span>
+            <span id="category">{ categoryHandled}</span>
+            <button><img src={mapsImg}/>ver rotas</button>
+            <div className="image-wrapper">
+                <img src={place.imageURL}/>
+            </div>
+            </div>:
+            <div className="no-place">
+                <span>Pesquise um local</span>
+            </div>
+            }  
+        
+            
+            
+        </Container>
+    );
+    }
 
 export default Sidebar;
