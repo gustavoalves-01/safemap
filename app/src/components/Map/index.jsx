@@ -30,7 +30,7 @@ const options = {
 
 export function Map (){   
       const { isLoaded, loadError } = useLoadScript( {
-        googleMapsApiKey: "AIzaSyAdKHx-aLz1X2Sj8HEGwY7kua1avlL7UfU",
+        googleMapsApiKey: "",
         libraries
       })
 
