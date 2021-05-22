@@ -3,325 +3,332 @@ import React, { useState } from 'react'
 export const PlaceContext = React.createContext({})
 
 export const PlaceProvider = (props) => {
-    let [ categoryHandled, setCategoryHandled ] = useState('default')
-    let [ categoryToHandle, setCategoryToHandle ] = useState('')
-    let [ isRendered, setIsRendered ] = useState(false)
-    
+    let [categoryHandled, setCategoryHandled] = useState(undefined)
+    let [categoryToHandle, setCategoryToHandle] = useState(undefined)
+    let [isRendered, setIsRendered] = useState(false)
+    let [placeDetails, setPlaceDetails] = useState({})
+
     function handleCategory() {
         switch (categoryToHandle) {
             case 'accounting':
-            setCategoryHandled("Contabilidade")
-            break;
+                setCategoryHandled("Contabilidade")
+                break;
             case 'airport':
-            setCategoryHandled("Aeroporto")
-            break;
+                setCategoryHandled("Aeroporto")
+                break;
             case 'amusement_park':
-            setCategoryHandled("Parque de Diversões")
-            break;
+                setCategoryHandled("Parque de diversões")
+                break;
             case 'aquarium':
-            setCategoryHandled("Aquário")
-            break;
+                setCategoryHandled("Aquário")
+                break;
             case 'art_gallery':
-            setCategoryHandled("Galeria de Arte")
-            break;
+                setCategoryHandled("Galeria de Arte")
+                break;
             case 'atm':
-            setCategoryHandled("Caixa Eletrônico")
-            break;
+                setCategoryHandled("Caixa eletrônico")
+                break;
             case 'bakery':
-            setCategoryHandled("Padaria")
-            break;
+                setCategoryHandled("Padaria")
+                break;
             case 'bank':
-            setCategoryHandled("Banco")
-            break;
+                setCategoryHandled("Banco")
+                break;
             case 'bar':
-            setCategoryHandled("Bar")
-            break;
+                setCategoryHandled("Bar")
+                break;
             case 'beauty_salon':
-            setCategoryHandled("salão de Beleza")
-            break;
+                setCategoryHandled("Salão de beleza")
+                break;
             case 'bicycle_store':
-            setCategoryHandled("Loja de Bicicletas")
-            break;
+                setCategoryHandled("Loja de bicicletas")
+                break;
             case 'book_store':
-            setCategoryHandled("Livraria")
-            break;
+                setCategoryHandled("Livraria")
+                break;
             case 'bowling_alley':
-            setCategoryHandled("Pista de Boliche")
-            break;
+                setCategoryHandled("Pista de boliche")
+                break;
             case 'bus_station':
-            setCategoryHandled("Ponto de Ônibus")
-            break;
+                setCategoryHandled("Estação de ônibus")
+                break;
             case 'cafe':
-            setCategoryHandled("Cafeteria")
-            break;
+                setCategoryHandled("Cafeteria")
+                break;
             case 'campground':
-            setCategoryHandled("Área de Camping")
-            break;
+                setCategoryHandled("Área de camping")
+                break;
             case 'car_dealer':
-            setCategoryHandled("Loja de Automóveis")
-            break;
+                setCategoryHandled("Concessionária")
+                break;
             case 'car_rental':
-            setCategoryHandled("Locadora de Automóveis")
-            break;
+                setCategoryHandled("Aluguel de carros")
+                break;
             case 'car_repair':
-            setCategoryHandled("Oficina de Reparos")
-            break;
+                setCategoryHandled("Mecânica")
+                break;
             case 'car_wash':
-            setCategoryHandled("Lava-Jato")
-            break;
+                setCategoryHandled("Lava-Jato")
+                break;
             case 'casino':
-            setCategoryHandled("Cassino")
-            break;
+                setCategoryHandled("Cassino")
+                break;
             case 'cemetery':
-            setCategoryHandled("Cemitério")
-            break;
+                setCategoryHandled("Cemitério")
+                break;
             case 'church':
-            setCategoryHandled("Igreja")
-            break;
+                setCategoryHandled("Igreja")
+                break;
             case 'city_hall':
-            setCategoryHandled("Câmara Municipal")
-            break;
+                setCategoryHandled("Câmara Municipal")
+                break;
             case 'clothing_store':
-            setCategoryHandled("loja de Roupas")
-            break;
+                setCategoryHandled("Loja de roupas")
+                break;
             case 'convenience_store':
-            setCategoryHandled("Loja de Conveniência")
-            break;
+                setCategoryHandled("Loja de conveniência")
+                break;
             case 'courthouse':
-            setCategoryHandled("Tribunal")
-            break;
+                setCategoryHandled("Tribunal")
+                break;
             case 'dentist':
-            setCategoryHandled("Dentista")
-            break;
+                setCategoryHandled("Dentista")
+                break;
             case 'department_store':
-            setCategoryHandled("Loja de Departamento")
-            break;
+                setCategoryHandled("Loja de departamento")
+                break;
             case 'doctor':
-            setCategoryHandled("Médico")
-            break;
+                setCategoryHandled("Médico")
+                break;
             case 'drugstore':
-            setCategoryHandled("Farmácia")
-            break;
+                setCategoryHandled("Farmácia")
+                break;
             case 'electrician':
-            setCategoryHandled("Eletricista")
-            break;
+                setCategoryHandled("Eletricista")
+                break;
             case 'electronics_store':
-            setCategoryHandled("Loja de eletrônicos")
-            break;
+                setCategoryHandled("Loja de eletrônicos")
+                break;
             case 'embassy':
-            setCategoryHandled("Embaixada")
-            break;
+                setCategoryHandled("Embaixada")
+                break;
             case 'fire_station':
-            setCategoryHandled("Corpo de Bombeiros")
-            break;
+                setCategoryHandled("Corpo de Bombeiros")
+                break;
             case 'florist':
-            setCategoryHandled("Florista")
-            break;
+                setCategoryHandled("Floricultura")
+                break;
             case 'funeral_home':
-            setCategoryHandled("Casa Funerária")
-            break;
+                setCategoryHandled("Casa funerária")
+                break;
             case 'furniture_store':
-            setCategoryHandled("Loja de Móveis")
-            break;
+                setCategoryHandled("Loja de móveis")
+                break;
             case 'gas_station':
-            setCategoryHandled("Posto de Gasolina")
-            break;
+                setCategoryHandled("Posto de gasolina")
+                break;
             case 'gym':
-            setCategoryHandled("Academia")
-            break;
+                setCategoryHandled("Academia")
+                break;
             case 'hair_care':
-            setCategoryHandled("Cabeleireiro")
-            break;
+                setCategoryHandled("Cabeleireiro")
+                break;
             case 'hardware_store':
-            setCategoryHandled("Loja de Ferramentas")
-            break;
+                setCategoryHandled("Loja de ferramentas")
+                break;
             case 'hindu_temple':
-            setCategoryHandled("Templo Hindu")
-            break;
+                setCategoryHandled("Templo hindu")
+                break;
             case 'home_goods_store':
-            setCategoryHandled("Loja de Utilidades")
-            break;
+                setCategoryHandled("Loja HomeGoods")
+                break;
             case 'hospital':
-            setCategoryHandled("Hospital")
-            break;
+                setCategoryHandled("Hospital")
+                break;
             case 'insurance_agency':
-            setCategoryHandled("Agência de Seguros")
-            break;
+                setCategoryHandled("Agência de seguros")
+                break;
             case 'jewelry_store':
-            setCategoryHandled("Joalheria")
-            break;
+                setCategoryHandled("Joalheria")
+                break;
             case 'laundry':
-            setCategoryHandled("Lavanderia")
-            break;
+                setCategoryHandled("Lavanderia")
+                break;
             case 'lawyer':
-            setCategoryHandled("Tribunal")
-            break;
+                setCategoryHandled("Tribunal")
+                break;
             case 'library':
-            setCategoryHandled("Biblioteca")
-            break;
+                setCategoryHandled("Biblioteca")
+                break;
             case 'light_rail_station':
-            setCategoryHandled("Estação de Metrô")
-            break;
+                setCategoryHandled("Estação de metrô")
+                break;
             case 'liquor_store':
-            setCategoryHandled("Loja de Bebidas")
-            break;
+                setCategoryHandled("Loja de bebidas")
+                break;
             case 'local_government_office':
-            setCategoryHandled("Escritório de Governo Local")
-            break;
+                setCategoryHandled("Escritório do governo local")
+                break;
             case 'locksmith':
-            setCategoryHandled("Chaveiro")
-            break;
+                setCategoryHandled("Chaveiro")
+                break;
             case 'lodging':
-            setCategoryHandled("Pousada")
-            break;
+                setCategoryHandled("Pousada")
+                break;
             case 'meal_delivery':
-            setCategoryHandled("Entrega de Refeição")
-            break;
+                setCategoryHandled("Entrega de refeição")
+                break;
             case 'meal_takeaway':
-            setCategoryHandled("Refeição para Viagem")
-            break;
+                setCategoryHandled("Refeição para viagem")
+                break;
             case 'mosque':
-            setCategoryHandled("Mesquita")
-            break;
+                setCategoryHandled("Mesquita")
+                break;
             case 'movie_rental':
-            setCategoryHandled("Locadora")
-            break;
+                setCategoryHandled("Locadora")
+                break;
             case 'movie_theater':
-            setCategoryHandled("Cinema")
-            break;
+                setCategoryHandled("Cinema")
+                break;
             case 'moving_company':
-            setCategoryHandled("Empresa de Mudanças")
-            break;
+                setCategoryHandled("Empresa de mudanças")
+                break;
             case 'museum':
-            setCategoryHandled("Museu")
-            break;
+                setCategoryHandled("Museu")
+                break;
             case 'night_club':
-            setCategoryHandled("Boate")
-            break;
+                setCategoryHandled("Boate")
+                break;
             case 'painter':
-            setCategoryHandled("Pintora")
-            break;
+                setCategoryHandled("Pintora")
+                break;
             case 'park':
-            setCategoryHandled("Parque")
-            break;
+                setCategoryHandled("Parque")
+                break;
             case 'parking':
-            setCategoryHandled("Estacionamento")
-            break;
+                setCategoryHandled("Estacionamento")
+                break;
             case 'pet_store':
-            setCategoryHandled("PetShop")
-            break;
+                setCategoryHandled("PetShop")
+                break;
             case 'pharmacy':
-            setCategoryHandled("Farmácia")
-            break;
+                setCategoryHandled("Farmácia")
+                break;
             case 'physiotherapist':
-            setCategoryHandled("Fisioterapeuta")
-            break;
+                setCategoryHandled("Fisioterapeuta")
+                break;
             case 'plumber':
-            setCategoryHandled("Encanador")
-            break;
+                setCategoryHandled("Encanador")
+                break;
             case 'police':
-            setCategoryHandled("Policia")
-            break;
+                setCategoryHandled("Policia")
+                break;
             case 'post_office':
-            setCategoryHandled("Correios")
-            break;
+                setCategoryHandled("Correios")
+                break;
             case 'primary_school':
-            setCategoryHandled("Escola Primária")
-            break;
+                setCategoryHandled("Escola primária")
+                break;
             case 'real_estate_agency':
-            setCategoryHandled("Agência Imobiliária")
-            break;
+                setCategoryHandled("Agência imobiliária")
+                break;
             case 'restaurant':
-            setCategoryHandled("Restaurante")
-            break;
+                setCategoryHandled("Restaurante")
+                break;
             case 'roofing_contractor':
-            setCategoryHandled("Empreiteira de telhados")
-            break;
+                setCategoryHandled("Empreiteira de telhados")
+                break;
             case 'rv_park':
-            setCategoryHandled("Camping para trailers")
-            break;
+                setCategoryHandled("Camping para trailers")
+                break;
             case 'school':
-            setCategoryHandled("Escola")
-            break;
+                setCategoryHandled("Escola")
+                break;
             case 'secondary_school':
-            setCategoryHandled("Escola secundária ")
-            break;
+                setCategoryHandled("Escola secundária ")
+                break;
             case 'shoe_store':
-            setCategoryHandled("Sapataria")
-            break;
+                setCategoryHandled("Sapataria")
+                break;
             case 'shopping_mall':
-            setCategoryHandled("Shopping Mall")
-            break;
+                setCategoryHandled("Shopping")
+                break;
             case 'spa':
-            setCategoryHandled("Spá")
-            break;
+                setCategoryHandled("Spá")
+                break;
             case 'stadium':
-            setCategoryHandled("Estádio")
-            break;
+                setCategoryHandled("Estádio")
+                break;
             case 'storage':
-            setCategoryHandled("Armazenamento")
-            break;
+                setCategoryHandled("Armazém")
+                break;
             case 'store':
-            setCategoryHandled("Loja")
-            break;
+                setCategoryHandled("Loja")
+                break;
             case 'subway_station':
-            setCategoryHandled("Estação de metrô")
-            break;
+                setCategoryHandled("Estação de metrô")
+                break;
             case 'supermarket':
-            setCategoryHandled("Supermercado")
-            break;
+                setCategoryHandled("Supermercado")
+                break;
             case 'synagogue':
-            setCategoryHandled("Sinagoga")
-            break;
+                setCategoryHandled("Sinagoga")
+                break;
             case 'taxi_stand':
-            setCategoryHandled("Ponto de táxi")
-            break;
+                setCategoryHandled("Ponto de táxi")
+                break;
             case 'tourist_attraction':
-            setCategoryHandled("Atração turista")
-            break;
+                setCategoryHandled("Atração turista")
+                break;
             case 'train_station':
-            setCategoryHandled("Estação de trem")
-            break;
+                setCategoryHandled("Estação de trem")
+                break;
             case 'transit_station':
-            setCategoryHandled("Estação de trânsito")
-            break;
+                setCategoryHandled("Estação de trânsito")
+                break;
             case 'travel_agency':
-            setCategoryHandled("Agência de viagem")
-            break;
+                setCategoryHandled("Agência de viagem")
+                break;
             case 'university':
-            setCategoryHandled("Universidade")
-            break;
+                setCategoryHandled("Universidade")
+                break;
             case 'veterinary_care':
-            setCategoryHandled("Cuidados veterinários")
-            break;
+                setCategoryHandled("Veterinário")
+                break;
             case 'zoo':
-            setCategoryHandled("Zoológico")
-            break;
+                setCategoryHandled("Zoológico")
+                break;
             default:
-            setCategoryHandled("Local")
+                setCategoryHandled("Local")
         }
     }
 
-    const [place, setPlace] = useState({
+    const [place, setPlace] = useState(
+        {
+        id: null,
         name: undefined,
         address: undefined,
         phone: undefined,
         category: undefined,
-        imageURL: undefined
-    })
+        imageURL: undefined,
+        people: null,
+       }
+)
 
-return (
-    <PlaceContext.Provider 
-        value={{
-            place,
-            setPlace,
-            categoryHandled,
-            handleCategory,
-            setCategoryToHandle,
-            categoryToHandle,
-            isRendered,
-            setIsRendered
-        }}
+    return (
+        <PlaceContext.Provider
+            value={{
+                place,
+                setPlace,
+                categoryHandled,
+                handleCategory,
+                setCategoryToHandle,
+                categoryToHandle,
+                isRendered,
+                setIsRendered,
+                placeDetails,
+                setPlaceDetails
+            }}
         >{props.children}</PlaceContext.Provider>
     )
 }
