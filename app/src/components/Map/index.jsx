@@ -35,6 +35,7 @@ export function Map() {
   })
 
   const mapRef = useRef()
+  
   const onMapLoad = useCallback((map) => {
     mapRef.current = map
   }, [])
@@ -83,10 +84,14 @@ function Locate({ panTo }) {
 }
 
 function Search({ panTo }) {
-  const { setPlace, setCategoryToHandle, categoryHandled, setIsRendered, place, setPlaceDetails, placeDetails, handleCategory, categoryToHandle } = usePlace()
+  const { setPlace, setCategoryToHandle, categoryHandled, setPlaceDetails, placeDetails} = usePlace()
   const [ placePhoto, setPlacePhoto ] = useState('')
-  
+  const [ searchParams, setSearchParams ] = useState({
+    placeId: '',
+    fields: [''],
+   })
 
+  // Faz a chamada na API places-autocomplete
   const {
     ready,
     value,
@@ -96,59 +101,20 @@ function Search({ panTo }) {
   } = usePlacesAutocomplete({
     requestOptions: {
     },
-    debounce: 300,
+    debounce: 350,
   })
+
+  // Fecha sugestões ao clicar em qualquer lugar fora da caixa de sugestões
   const ref = useOnclickOutside(() => {
     clearSuggestions();
   });
 
+  //Lida com o texto digitado no input
   const handleInput = (e) => {
     setValue(e.target.value);
   };
 
-  const handleSelect = ({ description, place_id }) => () => {
-    setValue(description, false)
-    clearSuggestions()
-    setIsRendered(true)
-
-     getGeocode({ address: description })
-      .then((results) => getLatLng(results[0]))
-      .then(({ lat, lng }) => {
-        panTo({ lat, lng })
-      })
-      .catch((error) => {
-        console.log("Error in panning: ", error);
-      })
-
-    const params = {
-      placeId: place_id,
-      fields: ["place_id", "name", "formatted_address", "formatted_phone_number", "photo", "types"]
-    }
-    
-     getDetails(params)
-    .then(async(details) => {
-      await setPlacePhoto(details.photos[0].getUrl([]))
-      await setCategoryToHandle(details.types[0])
-      setPlaceDetails(details)
-    })
-    .catch((error) => {
-      console.log("Place Details Error", error)
-    })
-  }
-
-  useEffect(() => {
-    console.log(placeDetails)
-    
-    setPlace({
-      id: placeDetails.place_id,
-      name: placeDetails.name,
-      address: placeDetails.formatted_address,
-      phone: placeDetails.formatted_phone_number,
-      category: categoryHandled,
-      imageURL: placePhoto
-    })
-}, [placeDetails])
-
+  // Renderiza as sugestões de locais
   const renderSuggestions = () =>
     data.map((suggestion) => {
       const {
@@ -162,6 +128,54 @@ function Search({ panTo }) {
         </li>
       );
     });
+
+  // Lida com a seleção da sugestão do local
+  const handleSelect = ({ description, place_id }) => () => {
+    setValue(description, false)
+    clearSuggestions()
+
+     getGeocode({ address: description })
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        panTo({ lat, lng })
+      })
+      .catch((error) => {
+        console.log("Error in panning: ", error);
+      })
+
+    setSearchParams({
+      placeId: place_id,
+      fields: ["place_id", "name", "formatted_address", "formatted_phone_number", "photo", "types"]
+    })
+  }
+
+  // Buscar detalhes dos locais na API
+  useEffect(() => {
+    console.log(searchParams)
+    getDetails(searchParams)
+      .then((result) => {
+        console.log('Detalhes:', result)
+        setPlacePhoto(result.photos[0].getUrl([]))
+        setCategoryToHandle(result.types[0])
+        setPlaceDetails(result)
+        console.log('sucessagem' + placeDetails)
+      })
+      .catch((err)=> {
+        console.log('Erro', err)
+      })
+  }, [searchParams])
+
+  // Atualiza o estado do local selecionado, para ser renderizado na Sidebar
+  useEffect(()=>{
+    setPlace({
+      id: placeDetails.place_id,
+      name: placeDetails.name,
+      address: placeDetails.formatted_address,
+      phone: placeDetails.formatted_phone_number,
+      category: categoryHandled,
+      imageURL: placePhoto
+    })
+  }, [placeDetails])
 
   return (
     <SearchContainer ref={ref}>

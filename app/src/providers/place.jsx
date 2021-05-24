@@ -7,6 +7,8 @@ export const PlaceProvider = (props) => {
     let [categoryToHandle, setCategoryToHandle] = useState(undefined)
     let [isRendered, setIsRendered] = useState(false)
     let [placeDetails, setPlaceDetails] = useState({})
+    const [isPlaceReady, setIsPlaceReady] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     function handleCategory() {
         switch (categoryToHandle) {
@@ -327,7 +329,11 @@ export const PlaceProvider = (props) => {
                 isRendered,
                 setIsRendered,
                 placeDetails,
-                setPlaceDetails
+                setPlaceDetails,
+                isPlaceReady, 
+                setIsPlaceReady,
+                loading, 
+                setLoading
             }}
         >{props.children}</PlaceContext.Provider>
     )
