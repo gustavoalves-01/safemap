@@ -302,7 +302,7 @@ export const PlaceProvider = (props) => {
         }
     }
 
-    const [place, setPlace] = useState([
+    const [places, setPlaces] = useState([
         {
         id: null,
         name: undefined,
@@ -310,7 +310,7 @@ export const PlaceProvider = (props) => {
         phone: undefined,
         category: undefined,
         imageURL: undefined,
-        people: null,
+        people: 0,
        }
     ])
 
@@ -322,8 +322,8 @@ export const PlaceProvider = (props) => {
     return (
         <PlaceContext.Provider
             value={{
-                place,
-                setPlace,
+                places,
+                setPlaces,
                 categoryHandled,
                 handleCategory,
                 setCategoryToHandle,
@@ -337,4 +337,4 @@ export const PlaceProvider = (props) => {
     )
 }
 
-export const usePlace = () => React.useContext(PlaceContext)
+export const usePlaces = () => React.useContext(PlaceContext)

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import useOnclickOutside from 'react-cool-onclickoutside'
 
-import { usePlace } from '../../providers/place'
+import { usePlaces } from '../../providers/place'
 
 // Imports de API
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
@@ -29,7 +29,7 @@ const options = {
 }
 
 export function Map() {
-  const {marker, setMarker} = usePlace()
+  const {marker, setMarker} = usePlaces()
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyAdKHx-aLz1X2Sj8HEGwY7kua1avlL7UfU",
     libraries
@@ -86,7 +86,7 @@ function Locate({ panTo }) {
 }
 
 function Search({ panTo }) {
-  const { setPlace, place, setCategoryToHandle, categoryHandled, setPlaceDetails, placeDetails, handleCategory, categoryToHandle, marker, setMarker} = usePlace()
+  const { setPlaces, places, setCategoryToHandle, categoryHandled, setPlaceDetails, placeDetails, handleCategory, categoryToHandle, marker, setMarker} = usePlaces()
   const [ placePhoto, setPlacePhoto ] = useState('')
   const [ searchParams, setSearchParams ] = useState({
     placeId: '',
@@ -139,7 +139,7 @@ function Search({ panTo }) {
      getGeocode({ address: description })
       .then((results) => getLatLng(results[0]))
       .then(({ lat, lng }) => {
-        setMarker({ lat: lat, lng: lng})
+        setMarker({lat,lng})
         panTo({ lat, lng })
       })
       .catch((error) => {
@@ -156,7 +156,7 @@ function Search({ panTo }) {
   useEffect(() => {
     console.log(searchParams)
     getDetails(searchParams)
-      .then(async(result) => {
+      .then((result) => {
         console.log('Detalhes:', result)
         try {
           const url = result.photos[0].getUrl([])
@@ -164,7 +164,6 @@ function Search({ panTo }) {
           console.log('Achou a foto')
         } catch (err) {
           console.log('Foto não encontrada', err)
-          setPlacePhoto('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.publicdomainpictures.net%2Fpt%2Fview-image.php%3Fimage%3D270609%26picture%3Dimagem-nao-encontrada&psig=AOvVaw3SXGMzVOj79320WrUl83Rt&ust=1621983692148000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNjT3qC24_ACFQAAAAAdAAAAABAD')
         }
 
         try { 
@@ -185,22 +184,22 @@ function Search({ panTo }) {
 
   // Atualiza o estado do local selecionado, para ser renderizado na Sidebar
   useEffect(()=>{
-    if(place.includes(placeDetails.place_id))
-    try {
-      setPlace([{
+   
+    
+    try { 
+      setPlaces([{
         id: placeDetails.place_id,
         name: placeDetails.name,
         address: placeDetails.formatted_address,
         phone: placeDetails.formatted_phone_number,
         category: categoryHandled,
-        imageURL: placePhoto
-      }, ...place])
+        imageURL: placePhoto,
+        people: 0,
+      }, ...places])
+      console.log('Lista de locais', places)
     } catch (error) {
       console.log('Falha ao adicionar local!', error)
     }
-
-    console.log('Lista de locais', place)
-    
   }, [placeDetails])
 
   return (

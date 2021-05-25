@@ -53,8 +53,9 @@ export const Container = styled.aside`
             box-shadow: 0 0 40px #00000030;
 
            img {
-            height: 100%;
-            object-fit: contain;
+            min-height: 100%;
+            max-height: 140%;
+            object-fit: fill;
            }
         }
 
