@@ -10,24 +10,20 @@ import { Container } from './styles';
 
 export function Sidebar() {
     const {
-        place,
-        categoryToHandle,
-        handleCategory,
-        loading, 
+        place
     } = usePlace()
 
-    handleCategory(categoryToHandle)
 
     return (
         <Container>
                 <div className="place-details">
-                <h1>{place.name}</h1>
-                <span id="address">{place.address}</span>
-                <span id="phone">{place.phone}</span>
-                <span id="category">{place.category}</span>
+                <h1>{place[0].name}</h1>
+                <span id="address">{place[0].address}</span>
+                <span id="phone">{place[0].phone}</span>
+                <span id="category">{place[0].category}</span>
                 <button><img src={mapsImg}/>ver rotas</button>
                 <div className="image-wrapper">
-                    <img src={place.imageURL} />
+                    <img src={place[0].imageURL} />
                 </div>
             </div>
             

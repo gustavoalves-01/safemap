@@ -5,10 +5,7 @@ export const PlaceContext = React.createContext({})
 export const PlaceProvider = (props) => {
     let [categoryHandled, setCategoryHandled] = useState(undefined)
     let [categoryToHandle, setCategoryToHandle] = useState(undefined)
-    let [isRendered, setIsRendered] = useState(false)
     let [placeDetails, setPlaceDetails] = useState({})
-    const [isPlaceReady, setIsPlaceReady] = useState(false)
-    const [loading, setLoading] = useState(false)
 
     function handleCategory() {
         switch (categoryToHandle) {
@@ -305,7 +302,7 @@ export const PlaceProvider = (props) => {
         }
     }
 
-    const [place, setPlace] = useState(
+    const [place, setPlace] = useState([
         {
         id: null,
         name: undefined,
@@ -315,7 +312,12 @@ export const PlaceProvider = (props) => {
         imageURL: undefined,
         people: null,
        }
-)
+    ])
+
+    const [marker, setMarker] = useState({
+        lat: null,
+        lng: null
+    })
 
     return (
         <PlaceContext.Provider
@@ -326,14 +328,10 @@ export const PlaceProvider = (props) => {
                 handleCategory,
                 setCategoryToHandle,
                 categoryToHandle,
-                isRendered,
-                setIsRendered,
                 placeDetails,
                 setPlaceDetails,
-                isPlaceReady, 
-                setIsPlaceReady,
-                loading, 
-                setLoading
+                marker, 
+                setMarker
             }}
         >{props.children}</PlaceContext.Provider>
     )
