@@ -18,6 +18,10 @@ export const GlobalStyle = createGlobalStyle`
     --purple: #AC84FF;
     --yellow: #F9A826;
 
+    --low: #009A44;
+    --medium: #F6EB61;
+    --high: #D6001C;
+
     --black: #101820;
     --gray: #E6E6E6;
 

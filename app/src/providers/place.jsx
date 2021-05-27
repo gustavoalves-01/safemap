@@ -302,17 +302,7 @@ export const PlaceProvider = (props) => {
         }
     }
 
-    const [places, setPlaces] = useState([
-        {
-        id: null,
-        name: undefined,
-        address: undefined,
-        phone: undefined,
-        category: undefined,
-        imageURL: undefined,
-        people: 0,
-       }
-    ])
+    const [places, setPlaces] = useState([{}])
 
     const [marker, setMarker] = useState({
         lat: null,

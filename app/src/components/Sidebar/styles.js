@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.aside`
+export const Container = styled.div`
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     width: 35vw;
     height: 100vh;
     position: absolute;
@@ -11,15 +11,117 @@ export const Container = styled.aside`
     box-shadow: 0 0 50px #00000070;
     z-index: 10;
 
+    header {
+        color: var(--black);
+        margin: 3rem auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--text);
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 200;
+        }
+
+        a {
+            font-size: 1.1rem;
+            text-decoration: none;
+            color: var(--black);
+            opacity: .3;
+        }
+    }
+`
+export const ContainerEmpty = styled.main`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 8rem;
+    height: 100%;
+
+    img {
+        height: 60%;
+        margin-bottom: 3rem;
+    }
+
+    h1 {
+        font-family: var(--text);
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        padding: 0 3rem;
+        color: var(--purple);
+        
+        b {
+            color: var(--yellow);
+        }
+    }
+
+`
+
+export const ContainerMain = styled.aside`
+    .density-info {
+        display: flex;
+        flex-direction: column;
+        font-family: var(--text);
+        align-items: center;
+
+        #linha-horizontal {
+        width: 30vw;
+        margin: 2rem auto;
+        border: 1px solid #00000030;
+        }
+
+        span {
+            font-weight: 300;
+            font-size: 1.2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            padding: .5rem 1.5rem;
+            border-radius: 5rem;
+            transition: all .2s ease-in-out;
+            margin: 1.5rem 0;
+
+            &:hover {
+                filter: brightness(.9);
+                transform: scale(1.05);
+            }
+        }
+
+        .low {
+            background-color: var(--low);
+            color: white;
+        }
+
+        .medium {
+            background-color: var(--yellow);
+            color: white;
+        }
+
+        .high {
+            background-color: var(--high);
+            color: white;
+        }       
+    }
+
     .place-details {
         display: grid;
         grid-template-columns: 2fr 1fr;
-        grid-template-rows: auto auto 2rem 2rem auto;
+        grid-template-rows: repeat(5, auto);
         text-align: end;
         align-items: center;
         font-family: var(--text);   
         gap: 0 2rem;
-        margin: 0 4rem 5rem;
+        margin: 0 4rem;
+        max-height: 30vh;
 
         h1 {
             font-size: 1.7rem;
@@ -36,8 +138,6 @@ export const Container = styled.aside`
 
         #address {
             word-wrap: break-word;
-            word-break: break-all;
-
         }
 
         .image-wrapper {
@@ -59,7 +159,8 @@ export const Container = styled.aside`
            }
         }
 
-        button {
+        a {
+            text-decoration: none;
             align-self: end;
             margin-left: 5rem;
             display: flex;
@@ -68,6 +169,7 @@ export const Container = styled.aside`
             font-size: 1.2rem;
             padding: .5rem .5rem;
             border-radius: 50px;
+            grid-row: 5/6;
 
             background-color:var(--black);
             color: var(--gray);
@@ -89,8 +191,27 @@ export const Container = styled.aside`
             }
         }
     }
-     
+
+    .confirm {
+        display: flex;
+        justify-content: center;
+        margin: 3.5rem auto;
+
+        button{
+        background-color:var(--purple);
+        border-radius: 50px;
+        border: none;
+        box-sizing: border-box;
+        padding: 1rem 3rem;
         
-    
-  
+        font-family: var(--text);
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: white;
+        transition: all .2s ease-in-out;
+        &:hover {
+            background-color: var(--yellow);
+        }
+    }
+    }
 `;
