@@ -10,9 +10,9 @@ function Routes() {
         <BrowserRouter>
         <Switch>
         <Route path='/' exact component={Login} />
-        <Route path='/Main'  component={Main} />
+        <Route path='/Main' component={Main} />
         </Switch>
         </BrowserRouter>
     );
 };
-export default Routes;
+export default Routes
