@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from 'react';
 
 // Imports de contextos
-import { usePlaces } from '../../providers/place'
+import { usePlaces } from '../../../../providers/place'
 
 // Imports de imagens
-import mapsImg from '../../assets/google-maps.svg'
-import searchImg from '../../assets/logo.svg'
+import mapsImg from '../../../../assets/google-maps.svg'
+import searchImg from '../../../../assets/logo.svg'
 
 // Imports de estilo
 import { Container, ContainerMain, ContainerEmpty } from './styles';

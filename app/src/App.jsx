@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Map } from './components/Map';
-import { Sidebar } from './components/Sidebar'
+import Main from './views/Main'
+import Login from './views/Login'
 
 import { GlobalStyle } from './styles/global'
 
@@ -9,8 +9,8 @@ function App() {
 
   return (
     <>
-    <Sidebar />
-    <Map />
+
+    <Login/>
     <GlobalStyle />
     </>
   );

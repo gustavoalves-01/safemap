@@ -30,6 +30,6 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 html {
-    background-color: var(--gray);
+    /* background-color: var(--gray); */
 }
 `

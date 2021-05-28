@@ -5,7 +5,7 @@ import { GoogleMap, useLoadScript, Marker, Circle } from "@react-google-maps/api
 import usePlacesAutocomplete, { getGeocode, getLatLng, getDetails } from "use-places-autocomplete"
 
 // Imports de contextos
-import { usePlaces } from '../../providers/place'
+import { usePlaces } from '../../../../providers/place'
 
 // Imports de estilo
 import { Container, SearchContainer } from './styles'
@@ -143,7 +143,6 @@ export function Map() {
       </div>
       <div className="pesquisa">
         <Search panTo={panTo} />
-        {/* S */}
       </div>
     </Container>
   )
