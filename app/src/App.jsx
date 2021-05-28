@@ -3,14 +3,15 @@ import React from 'react'
 import Main from './views/Main'
 import Login from './views/Login'
 
+import Routes from './Routes'
+
 import { GlobalStyle } from './styles/global'
 
 function App() {
 
   return (
     <>
-
-    <Login/>
+    <Routes />
     <GlobalStyle />
     </>
   );

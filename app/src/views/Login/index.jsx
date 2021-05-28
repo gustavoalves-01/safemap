@@ -1,15 +1,21 @@
 import React from 'react';
 
-import { Container, SearchContainer } from './styles'
+import Slogan from './components/Slogan'
+import LoginModal from './components/LoginModal'
+
+
+
+import { Container } from './styles'
 
 import bgImg from '../../assets/login-bg.png'
-import mapImg from '../../assets/map-login.svg'
 
 function Login() {
   return (
       <Container>
-          <img src={bgImg} alt="" />
-          <img src={mapImg} alt="" id="map" />
+          <Slogan />
+          <LoginModal />
+          <img src={bgImg} alt="" id="bg"/>
+          
       </Container>
   );
 }
