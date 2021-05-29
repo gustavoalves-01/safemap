@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 
 import { Container } from './styles';
 
-
 import Routes from '../../../../Routes'
 
 function LoginModal({onOpenForgotPasswordModal}) {
