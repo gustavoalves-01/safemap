@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import { Container } from './styles';
 
+
 import Routes from '../../../../Routes'
 
-function LoginModal() {
+function LoginModal({onOpenForgotPasswordModal}) {
+
   return (
       <Container>
           <div className="modal-content">
@@ -13,7 +15,7 @@ function LoginModal() {
             <input type="text" placeholder="usuário" required />
             <input type="password" placeholder="senha" required />
             <button onClick={() =>{ window.location.href = "//localhost:3000/Main"}}>Entrar</button>
-            <a href="#">Esqueci minha senha</a>
+            <a onClick={onOpenForgotPasswordModal}>Esqueci minha senha</a>
             </form>
             <span className="or">ou</span>
             <button className="signup">Cadastrar</button>

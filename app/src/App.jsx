@@ -1,11 +1,12 @@
 import React from 'react'
 
-import Main from './views/Main'
-import Login from './views/Login'
+import Modal from 'react-modal'
 
 import Routes from './Routes'
 
 import { GlobalStyle } from './styles/global'
+
+Modal.setAppElement('#root')
 
 function App() {
 

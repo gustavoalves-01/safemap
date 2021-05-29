@@ -18,7 +18,7 @@ export const Container = styled.div`
     
     font-family: var(--text);
     color: var(--black);
-    z-index: 10;
+    z-index: 2;
     
 
     .loginSpan{

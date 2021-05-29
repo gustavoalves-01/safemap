@@ -8,10 +8,10 @@ import Login from './views/Login';
 function Routes() {
     return(
         <BrowserRouter>
-        <Switch>
-        <Route path='/' exact component={Login} />
-        <Route path='/Main' component={Main} />
-        </Switch>
+            <Switch>
+                <Route path='/' exact component={Login} />
+                <Route path='/Main' component={Main} />
+            </Switch>
         </BrowserRouter>
     );
 };
