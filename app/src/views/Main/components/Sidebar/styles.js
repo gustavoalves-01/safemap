@@ -25,11 +25,19 @@ export const Container = styled.div`
             font-weight: 200;
         }
 
-        a {
+        #signout{
             font-size: 1.1rem;
+            border: none;
+            font-weight: 200;
+            cursor: pointer;
             text-decoration: none;
             color: var(--black);
             opacity: .3;
+            transition: all .2s ease-in-out;
+            &:hover {
+                opacity: .7;
+                font-weight: 700;
+            }
         }
     }
 `

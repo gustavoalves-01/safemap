@@ -17,7 +17,6 @@ export const Container = styled.main`
   #map {
    
     width: 25%;
-    
     transform: translate(-50%, -50%);
   }
 `;

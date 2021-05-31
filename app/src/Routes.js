@@ -9,8 +9,7 @@ function Routes() {
     return(
         <BrowserRouter>
             <Switch>
-                <Route path='/' exact component={Login} />
-                <Route path='/Main' component={Main} />
+                <Route exact path='/' component={Main} />
             </Switch>
         </BrowserRouter>
     );

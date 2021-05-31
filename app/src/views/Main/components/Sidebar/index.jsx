@@ -15,7 +15,7 @@ import { Container, ContainerMain, ContainerEmpty } from './styles';
 // Componente de Sidebar
 export function Sidebar() {
     // Recupera dados fornecidos pelo contexto de users
-    const { username, setUsername, nome1 } = useUser()
+    const { username, setUsername } = useUser()
     // Recupera dados fornecidos pelo contexto de lugares
     const { places, setPlaces } = usePlaces()
     // Estado para guardar os ClassNames relacionados ao grau de risco
@@ -56,12 +56,11 @@ export function Sidebar() {
         }
    },[places[0].people])
 
-
     return (
         <Container>
             <header>
-                <h1>Bem vindo ao SafeMap, <b>{nome1}</b></h1>
-                <a href="#">fazer logout</a>
+                <h1>Bem vindo ao SafeMap, <b>{username}</b></h1>
+                <button id="signout" onClick={() => {window.location.href = "http://localhost:3000"}}>fazer logout</button>
             </header>
 
             { isEmpty ?

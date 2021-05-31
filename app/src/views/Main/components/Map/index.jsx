@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import useOnclickOutside from 'react-cool-onclickoutside'
 import { GoogleMap, useLoadScript, Marker, Circle } from "@react-google-maps/api"
 import usePlacesAutocomplete, { getGeocode, getLatLng, getDetails } from "use-places-autocomplete"
+import api from '../../../../services/api'
+
 
 // Imports de contextos
 import { usePlaces } from '../../../../providers/place'

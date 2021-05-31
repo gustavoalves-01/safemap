@@ -7,12 +7,12 @@ import { Container } from './styles'
 
 import bgImg from '../../assets/login-bg.png'
 
-function Login() {
+function Login(props) {
 
   return (
       <Container>
           <Slogan />
-          <LoginModal />
+          <LoginModal onReceiveGoogleData={props.onReceiveGoogleData}/>
           <img src={bgImg} alt="" id="bg"/>          
       </Container>
   );
